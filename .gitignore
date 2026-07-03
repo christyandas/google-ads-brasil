@@ -1,0 +1,5 @@
+# Segredos e credenciais
+*.json
+!**/schema-*.json
+secrets/
+.env
