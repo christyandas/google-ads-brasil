@@ -1432,11 +1432,19 @@ CAMPOS.forEach(([sel,k,tipo]) => {
     save(); aplicarTema(); renderAjustes();
   });
 });
-$("#expBtn").addEventListener("click", () => {
-  const blob = new Blob([JSON.stringify(S, null, 2)], { type:"application/json" });
+$("#expBtn").addEventListener("click", async () => {
+  const json = JSON.stringify(S, null, 2), nome = `ferro-rotina-${iso()}.json`;
+  // Hospedado como página do claude.ai, o download passa pelo runtime; fora dele, é link normal.
+  const dl = window.claude && window.claude.use ? await window.claude.use("downloads").catch(() => null) : null;
+  if (dl){
+    try { await dl.save({ filename:nome, data:json }); toast("Backup salvo."); }
+    catch(err){ if (!err || err.code !== "declined") toast("Não consegui salvar o arquivo."); }
+    return;
+  }
+  const blob = new Blob([json], { type:"application/json" });
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
-  a.download = `ferro-rotina-${iso()}.json`;
+  a.download = nome;
   document.body.appendChild(a); a.click(); a.remove();
   setTimeout(() => URL.revokeObjectURL(a.href), 1000);
 });
