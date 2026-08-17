@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Ferro &amp; Rotina">
+  <rect width="512" height="512" rx="112" fill="#131417"/>
+  <g stroke="#e9663a" stroke-width="30" stroke-linecap="round" fill="none">
+    <path d="M116 196v120M396 196v120"/>
+    <path d="M176 156v200M336 156v200"/>
+    <path d="M176 256h160"/>
+  </g>
+</svg>
